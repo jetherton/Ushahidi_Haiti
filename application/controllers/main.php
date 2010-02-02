@@ -13,6 +13,8 @@
  * @license    http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL) 
  */
 class Main_Controller extends Template_Controller {
+	
+	private $db;
 
     public $auto_render = TRUE;
 	
@@ -38,6 +40,8 @@ class Main_Controller extends Template_Controller {
         // Load Header & Footer
         $this->template->header  = new View('header');
         $this->template->footer  = new View('footer');
+        
+        $this->db = new Database;
 		
 		//call the feedback form
 		$this->_get_feedback_form();
@@ -213,8 +217,19 @@ class Main_Controller extends Template_Controller {
 			->with('location')
             ->find_all();
 		
+		// Get quick stats for "Latest Activity"
+		// note: Kohana ORM doesn't support these fancy date search features
+		$this->template->content->latest_activity_today = count($this->db->query(
+			'SELECT id FROM incident WHERE incident_dateadd >= DATE_SUB(CURDATE(),INTERVAL 0 DAY);'
+			));
+		$this->template->content->latest_activity_yesterday = count($this->db->query(
+			'SELECT id FROM incident WHERE incident_dateadd >= DATE_SUB(CURDATE(),INTERVAL 1 DAY) AND incident_dateadd < DATE_SUB(CURDATE(),INTERVAL 0 DAY);'
+			));
+		$this->template->content->latest_activity_week = count($this->db->query(
+			'SELECT id FROM incident WHERE incident_dateadd >= DATE_SUB(CURDATE(),INTERVAL 1 WEEK);'
+			));
+		// End getting of quick stats for "Latest Activity"
 		
-
 		// Get Default Color
 		$this->template->content->default_map_all = Kohana::config('settings.default_map_all');
 		

@@ -110,9 +110,23 @@
 									
                                     <li class="report r-online"><?php echo Kohana::lang('ui_main.report_option_4'); ?> <a href="<?php echo url::base() . 'reports/submit/'; ?>">Submit Report
                                     </a></li>
-								</ol>					
-		
+								</ol>	
 							</div>
+							<?php if($latest_activity_week != 0){ ?>
+                            <div class="additional-content latest-activity">
+								<h5>Latest Activity</h5>
+                                <ul>
+                                	
+                                	<li><span class="announcement small"><?php echo $latest_activity_today; ?></span> report<?php echo ($latest_activity_today == 1) ? " was" : "s were"; ?> added <strong>today</strong>.</li>
+                                    
+                                    <li><span class="announcement small"><?php echo $latest_activity_yesterday; ?></span> report<?php echo ($latest_activity_yesterday == 1) ? " was" : "s were"; ?> added <strong>yesterday</strong>.</li>
+                                    
+                                    <li><span class="announcement small"><?php echo $latest_activity_week; ?></span> report<?php echo ($latest_activity_week == 1) ? "" : "s"; ?> have been added <strong>this week</strong>.</li>
+                                
+                                </ul>
+                            </div>
+                            <?php } ?>
+                            
 						</div>
 						<!-- / right column -->
 					
@@ -156,7 +170,11 @@
 									<div id="mapOutput"></div>
 								</div>
 								<div style="clear:both;"></div>
-								<?php if($map_container === 'map') { ?>
+                                
+                                <div class="cat-filters clearingfix" style="margin-top:20px;">
+                                    <strong>Timeline of Events</strong>
+                                </div>
+                               <?php if($map_container === 'map') { ?>
 								<div class="slider-holder">
 									<form action="">
 										<input type="hidden" value="0" name="currentCat" id="currentCat">
