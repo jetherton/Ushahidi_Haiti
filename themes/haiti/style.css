@@ -33,7 +33,7 @@ Author Email: david@ushahidi.com
 		color:#eee;
 	}
 
-	div.additional-content { overflow:auto; }
+	div.additional-content { overflow:auto; padding:10px 15px; }
 
 
 /* Submit Button */
@@ -76,10 +76,12 @@ Author Email: david@ushahidi.com
 	#shortcode-header-info { width:960px; margin:0 auto; padding:0 0 3px 18px; background:transparent url(icons.png) 0 -97px no-repeat; }
 	#shortcode-header-info span { padding:5px; background:#fff; font-weight:bold; color:#F00; }
 	
-	#announcement-box { position:absolute; top:61px; left:215px; }
+	#announcement-box { position:absolute; top:61px; left:490px; }
 	
 	/* Generic */
 	.announcement { background:#FFF9D8; padding:10px; margin:0 18px 10px 0; border:1px solid #ffed8d; float:left; width:236px;   }
+		.small { float:none; width:auto; margin:0; padding:4px 6px 2px; }
+		
 	.announcement h3 { margin:0 0 5px 0; background:transparent url(icons.png) 0 -205px no-repeat; font-size:14px; padding:0 0 0 23px; }
 		
 		/* Diaspora */
@@ -87,10 +89,15 @@ Author Email: david@ushahidi.com
 		#diaspora-info h3 { background:transparent url(icons.png) 0 -236px no-repeat; }
 		
 		/* Clickatel */
-		#clickatel-info { width:247px; margin-right:0;}
+		#clickatel-info { width:247px; margin-right:0; display:none; }
 		#clickatel-info h3 { }
 		.announcement p { }
-	
+
+
+/* Latest Activity */
+	.latest-activity { margin-top:18px; }
+	.latest-activity ul li { list-style-type:none; padding:0px; margin:0 0 13px; }
+
 /* Incident/Feed Grid */
 	#feed-grid-table {  }
 	#feed-grid-table td { width:454px; vertical-align:top; }
