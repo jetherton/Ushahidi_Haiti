@@ -41,10 +41,19 @@
 							<?php print form::open() ?>
 							<div class="step-1">
 								<h2><?php echo Kohana::lang('ui_main.alerts_step1_select_city'); ?></h2>
-								<div class="map">
+								<div class="map" style="padding-bottom:35px;">
 									<p><?php echo Kohana::lang('ui_main.alerts_place_spot'); ?></p>
-									<div class="map-holder" id="divMap"></div>
-								</div>
+									
+                                    <div class="map-holder" id="divMap"></div>
+                                    <div style="clear:both;"></div>
+                                    
+                                    <div id="mapStatus" style="width:385px; border-top:1px solid #999;">
+                                    	<div id="mapMousePosition" style="min-width: 135px;border-right: solid 1px #999;text-align: center"></div>
+                                    </div>
+                                    <div style="clear:both;"></div>
+								
+                                
+                                </div>
 								<div class="report-find-location">
 									<?php print form::input('location_find', '', ' title="City, State and/or Country" class="findtext"'); ?>
 									<div style="float:left;margin:9px 0 0 5px;"><input type="button" name="button" id="button" value="Find Location" class="btn_find" /></div>
