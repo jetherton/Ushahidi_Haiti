@@ -228,6 +228,7 @@ class Main_Controller extends Template_Controller {
 		$this->template->content->latest_activity_week = count($this->db->query(
 			'SELECT id FROM incident WHERE incident_dateadd >= DATE_SUB(CURDATE(),INTERVAL 1 WEEK);'
 			));
+		$this->template->content->latest_activity_total_from_sms = Incident_Model::num_incidents_by_sms();
 		// End getting of quick stats for "Latest Activity"
 		
 		// Get Default Color

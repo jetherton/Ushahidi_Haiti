@@ -122,6 +122,8 @@
                                     <li><span class="announcement small"><?php echo $latest_activity_yesterday; ?></span> report<?php echo ($latest_activity_yesterday == 1) ? " was" : "s were"; ?> added <strong>yesterday</strong>.</li>
                                     
                                     <li><span class="announcement small"><?php echo $latest_activity_week; ?></span> report<?php echo ($latest_activity_week == 1) ? "" : "s"; ?> have been added <strong>this week</strong>.</li>
+                                    
+                                    <li><span class="announcement small"><?php echo $latest_activity_total_from_sms; ?></span> <?php echo ($latest_activity_total_from_sms == 1) ? "report was" : "total reports have been"; ?> created via SMS.</li>
                                 
                                 </ul>
                             </div>

@@ -61,7 +61,7 @@ class Incident_Model extends ORM
 	static function get_incidents_by_interval($interval='month',$start_date=NULL,$end_date=NULL,$active='true',$media_type=NULL)
 	{
 		// get graph data
-		// could not use DB query builder. It does not support parentheses yet
+		// could not use DB query builder. It does not support parenthesis yet
 		$db = new Database();
 
 		$select_date_text = "DATE_FORMAT(incident_date, '%Y-%m-01')";
@@ -142,5 +142,26 @@ class Incident_Model extends ORM
 		}
 		$graphs = json_encode($all_graphs);
 		return $graphs;
+	}
+	
+	static function num_incidents_by_sms(){
+		
+		$db = new Database();
+		
+		// ORM was giving me a hard time so I hard coded this one (I need a break!)
+		$query = 'SELECT id FROM service WHERE service_name = \'SMS\' LIMIT 1;';
+		$result = $db->query($query);
+		foreach($result as $service) $service_id = $service->id;
+		
+		if(!isset($service_id)) return 0;
+		
+		// Parenthesis support is lacking in Kohana ORM so free balling this one.
+		$query = 'SELECT COUNT(incident.id) as total FROM message JOIN reporter ON reporter.id = message.reporter_id JOIN incident ON incident.id = message.incident_id WHERE (reporter.service_id = '.$service_id.' AND message.incident_id != 0) OR incident.incident_custom_phone != \'\';';
+		$result = $db->query($query);
+		foreach($result as $count) $total = $count->total;
+		
+		if(!isset($total)) return 0;
+		
+		return $total;
 	}
 }
