@@ -155,13 +155,23 @@ class Incident_Model extends ORM
 		
 		if(!isset($service_id)) return 0;
 		
+		$massive_array = array();
+		
 		// Parenthesis support is lacking in Kohana ORM so free balling this one.
-		$query = 'SELECT COUNT(incident.id) as total FROM message JOIN reporter ON reporter.id = message.reporter_id JOIN incident ON incident.id = message.incident_id WHERE (reporter.service_id = '.$service_id.' AND message.incident_id != 0) OR incident.incident_custom_phone != \'\';';
+		$query = 'SELECT incident.id as id FROM message JOIN reporter ON reporter.id = message.reporter_id JOIN incident ON incident.id = message.incident_id WHERE reporter.service_id = '.$service_id.' AND message.incident_id != 0;';
 		$result = $db->query($query);
-		foreach($result as $count) $total = $count->total;
+		foreach($result as $count) {
+			$massive_array[] = $count->id;
+		}
 		
-		if(!isset($total)) return 0;
+		$query = 'SELECT id FROM incident WHERE incident_custom_phone != \'\';';
+		$result = $db->query($query);
+		foreach($result as $count) {
+			$massive_array[] = $count->id;
+		}
 		
-		return $total;
+		$massive_array = array_unique($massive_array);
+		
+		return count($massive_array);
 	}
 }
