@@ -30,24 +30,26 @@
 							<ul class="category-filters">
 								<li><a class="active" id="cat_0" href="#"><div class="swatch" style="background-color:#<?php echo $default_map_all;?>"></div><div class="cat-title">All Categories</div></a></li>
 								<?php
-                                                                        //print_r($categories);
-                                                                        foreach ($categories as $category => $category_info)
+									//print_r($categories);
+									foreach ($categories as $category => $category_info)
 									{
 										$category_title = $category_info[0];
-                                                                                $category_color = $category_info[1];
-                                                                                $category_image = $category_info[2];
-                                                                                //echo '<li><a href="#" id="cat_'. $category .'"><div class="swatch" style="background-color:#'.$category_color.'"></div><div class="category-title">'.$category_title.'</div></a></li>';
-                                                                                if( !empty($category_image)){
-                                                                            echo '<li><a href="#" id="cat_'. $category .'"><div class="swatch"><img src="'.url::base()."media/uploads/".$category_image.'" border="0"></div>
-                                                                                <div class="cat-title">'.$category_title.'</div></a></li>';
-                                                                        }else{
-                                                                            echo '<li><a href="#" id="cat_'. $category .'"><div class="swatch" style="background-color:#'.$category_color.'"></div>
-                                                                                <div class="cat-title">'.$category_title.'</div></a></li>';
-                                                                        }
+										$category_color = $category_info[1];
+										$category_image = $category_info[2];
+										
+										//echo '<li><a href="#" id="cat_'. $category .'"><div class="swatch" style="background-color:#'.$category_color.'"></div><div class="category-title">'.$category_title.'</div></a></li>';
+										
+										if( !empty($category_image)){
+											echo '<li><a href="#" id="cat_'. $category .'"><div class="swatch"><img src="'.url::base()."media/uploads/".$category_image.'" border="0"></div>
+												<div class="cat-title">'.$category_title.'</div></a>';
+										}else{
+											echo '<li><a href="#" id="cat_'. $category .'"><div class="swatch" style="background-color:#'.$category_color.'"></div>
+												<div class="cat-title">'.$category_title.'</div></a>';
+										}
 
 
 										// Get Children
-										echo '<div class="hide" id="child_'. $category .'">';
+										echo '<div class="hide" id="child_'. $category .'"><ul>';
 										//if(is_array($category_info[3])){
 											foreach ($category_info[3] as $child => $child_info)
 											{
@@ -64,7 +66,7 @@
 												}												
 											}
 										//}
-										echo '</div>';
+										echo '</ul></div></li>';
 									}							
 								?>
 							</ul>
