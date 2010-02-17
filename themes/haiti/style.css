@@ -9,7 +9,7 @@ Author Email: david@ushahidi.com
 
 /* header background */
 	body#page{
-		background: #585858 url(bkg.gif) repeat-x;
+		background: #585858 url(bkg_new.gif) repeat-x;
 		background-position:0px 33px;
 		overflow-x:hidden;
 	}
@@ -21,8 +21,7 @@ Author Email: david@ushahidi.com
 /* Logo Box */
 	div#logo{
 		background-color:transparent;
-		padding-top:5px;
-		padding-bottom:0;
+		padding:5px 0 0 0;
 		height:50px;
 	}
 	div#logo h1{
@@ -30,10 +29,11 @@ Author Email: david@ushahidi.com
 		font-size:36px;
 	}
 	div#logo span{
-		color:#eee;
+		color:#eee; font-size:12px; position:relative;
 	}
-
-	div.additional-content { overflow:auto; padding:10px 15px; }
+		span.tufts { display:block; margin:35px 0 0 0; }
+		#tufts-logo { position:absolute; left:107px; top:-7px; }
+		div.additional-content { overflow:auto; padding:10px 15px; }
 
 .hide { display:none; }
 

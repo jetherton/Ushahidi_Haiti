@@ -223,7 +223,8 @@
 			<!-- logo -->
 			<div id="logo">
 				<h1><?php echo $site_name; ?></h1>
-				<span><?php echo $site_tagline; ?></span>
+				<span><?php echo $site_tagline; ?></span><br />
+                <span class="tufts">Ushahidi-Haiti&nbsp;&nbsp;&nbsp;@ <img id="tufts-logo" src="<?php echo url::base()?>themes/haiti/tufts-logo.png" /></span>
 			</div>
 			<!-- / logo -->
 		
