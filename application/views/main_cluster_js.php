@@ -105,10 +105,10 @@
 				var catID = this.id.substring(4);
 				var catSet = 'cat_' + this.id.substring(4);
 				$("a[id^='cat_']").removeClass("active"); // Remove All active
-				$("[id^='child_']").hide(); // Hide All Children DIV
+				$("[id^='child_']").hide(); // Hide All Children UL
 				$("#cat_" + catID).addClass("active"); // Add Highlight
-				$("#child_" + catID).show(); // Show children DIV
-				$(this).parents("div").show();
+				$("#child_" + catID).show(); // Show children UL
+				$(this).parents("ul").show();
 				
 				currentCat = catID;
 				$("#currentCat").val(catID);

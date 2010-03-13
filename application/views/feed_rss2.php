@@ -25,7 +25,7 @@
 		foreach ($items as $item) { ?>
 
 		<item>
-			<title><?php echo $item['title']; ?></title>
+			<title><?php echo html::specialchars($item['title']); ?></title>
 			<link><?php echo $item['link']; ?></link>
 			<description><![CDATA[<?php 
 				if(isset($_GET['actionable'])) echo "".$item['point'][0]." ".$item['point'][1]." - Phone: ".$item['phone']." - ";
