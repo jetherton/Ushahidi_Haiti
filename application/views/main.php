@@ -28,52 +28,38 @@
 							</div>
 						
 							<ul class="category-filters">
-								<li><a class="active" id="cat_0" href="#"><div class="swatch" style="background-color:#<?php echo $default_map_all;?>"></div><div class="cat-title">All Categories</div></a></li>
+								<li class="cat-parent cat-noimage"><a class="active" id="cat_0" href="#">
+									<span class="swatch" style="background-color:#<?php echo $default_map_all;?>"></span> All Categories
+								</a></li>
+								
 								<?php
-									//print_r($categories);
-									foreach ($categories as $category => $category_info)
-									{
+									foreach ($categories as $category => $category_info) {
 										$category_title = $category_info[0];
 										$category_color = $category_info[1];
 										$category_image = $category_info[2];
-										
-										//echo '<li><a href="#" id="cat_'. $category .'"><div class="swatch" style="background-color:#'.$category_color.'"></div><div class="category-title">'.$category_title.'</div></a></li>';
-										
 										if( !empty($category_image)){
-											echo '<li><a href="#" id="cat_'. $category .'"><div class="swatch"><img src="'.url::base()."media/uploads/".$category_image.'" border="0"></div>
-												<div class="cat-title">'.$category_title.'</div></a>';
+											echo '<li class="cat-parent"><a href="#" id="cat_'. $category .'" style="background-image: url('.url::base().'media/uploads/'.$category_image.')">'.$category_title.'</a>';
 										}else{
-											echo '<li><a href="#" id="cat_'. $category .'"><div class="swatch" style="background-color:#'.$category_color.'"></div>
-												<div class="cat-title">'.$category_title.'</div></a>';
+											echo '<li class="cat-parent cat-noimage"><a href="#" id="cat_'. $category .'"><span class="swatch" style="background-color:#'.$category_color.'"></span>'.$category_title.'</a>';
 										}
 
-
 										// Get Children
-										echo '<div class="hide" id="child_'. $category .'"><ul>';
-										//if(is_array($category_info[3])){
-											foreach ($category_info[3] as $child => $child_info)
-											{
+										echo '<ul class="hide" id="child_'. $category .'">';
+											foreach ($category_info[3] as $child => $child_info) {
 												$child_title = $child_info[0];
 												$child_color = $child_info[1];
-												$child_image = $child_info[2 ];
-												//echo '<li style="padding-left:20px;"><a href="#" id="cat_'. $child .'"><div class="swatch" style="background-color:#'.$child_color.'"></div><div class="category-title">'.$child_title.'</div></a></li>';
-												
+												$child_image = $child_info[2];
 												if( !empty($child_image)){
-													echo '<li style="padding-left:20px;"><a href="#" id="cat_'. $child .'"><div class="swatch child"><img src="'.url::base()."media/uploads/".$child_image.'" border="0"></div>
-												    <div class="cat-title">'.$child_title.'</div></a></li>';
+													echo '<li class="cat-child"><a href="#" id="cat_'. $child .'" style="background-image: url('.url::base().'media/uploads/'.$child_image.')">'.$child_title.'</a></li>';
 												}else{
-													echo '<li style="padding-left:20px;"><a href="#" id="cat_'. $child .'"><div class="swatch child" style="background-color:#'.$child_color.'"></div><div class="cat-title">'.$child_title.'</div></a></li>';
+													echo '<li class="cat-child cat-noimage"><a href="#" id="cat_'. $child .'"><span class="swatch" style="background-color:#'.$child_color.'"></span>'.$child_title.'</a></li>';
 												}												
 											}
-										//}
-										echo '</ul></div></li>';
+										echo '</ul></li>';
 									}							
 								?>
 							</ul>
-							<!-- / category filters -->
-							
-							
-							
+							<!-- /category filters -->
 							
 							<br />
 						

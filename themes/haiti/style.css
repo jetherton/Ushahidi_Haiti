@@ -114,8 +114,72 @@ Author Email: david@ushahidi.com
 	table.table-list thead th.location { width:75px; }
 	
 /* Category Filter on Home Page */
-	ul.category-filters li a { font-size:11px; }
-	
+ul.category-filters {
+	padding: 0 0 8px 0;
+	background: #E7E3DA;
+	border: 0;
+	list-style: none;
+	}
+ul.category-filters li {
+	margin: 0;
+	padding: 0;
+	}
+ul.category-filters li a {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	height: 35px;
+	border: 0;
+	padding: 12px 10px 8px 70px;
+	background-position: 10px 5px;
+	background-repeat: no-repeat;
+	font-size: 12px;
+	text-transform: uppercase;
+	font-weight: bold;
+	text-decoration: none;
+	color: #3F3F3F;
+	line-height: 17px;
+	text-shadow: #fff 1px 1px 0;
+	}
+ul.category-filters li.cat-noimage a {
+	padding-left: 10px;
+	}
+ul.category-filters li .swatch {
+	width: 46px;
+	height: 46px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	margin-top: -7px;
+	}
+ul.category-filters li a.active {
+	border: 0;
+	background-color: #3484AC;
+	text-shadow: #32698E 1px 1px 0;
+	color: #FFF;
+	}
+ul.category-filters li a.active:hover {
+	background-color: #347099;
+	text-shadow: #32698E 1px 1px 0;
+	color: #fff;
+	}
+ul.category-filters li a:hover {
+	border: 0;
+	color: #111;
+	background-color: #D8D3CC;
+	text-shadow: #fff 1px 1px 0;
+	}
+ul.category-filters li ul {
+	margin: 2px 0 8px 11px;
+	border-left: 1px solid #D0CCC5;
+	}
+ul.category-filters li li {
+	list-style-type: none;
+	}
+ul.category-filters li li a {
+	padding-left: 65px;
+	background-position: 10px 5px;
+	}
+			
 /* How To Report on home page) */
 	div.additional-content ol { margin:0; }
 	li.report { list-style-type:none; padding:0 0 0 25px; margin-bottom:8px; }
