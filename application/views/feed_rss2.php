@@ -29,7 +29,7 @@
 			<link><?php echo $item['link']; ?></link>
 			<description><![CDATA[<?php 
 				if(isset($_GET['actionable'])) echo "".$item['point'][0]." ".$item['point'][1]." - Phone: ".$item['phone']." - ";
-				echo $item['description'];
+				echo html::specialchars($item['description']);
 			?>]]></description>
 			<pubDate><?php echo gmdate("D, d M Y H:i:s T", strtotime($item['date'])); ?></pubDate>
 			<guid><?php if(isset($item['guid'])) echo $item['guid']; else echo $item['link'] ?></guid>
