@@ -246,25 +246,54 @@ ul.category-filters li li a {
 	.download-reports { margin-top:18px; }
 
 /* Button Styles */
-	a.button {
-	  background: transparent url('../images/bg_button.gif') no-repeat scroll top left;
-	  display: block; float: left; line-height:24px; font-weight:bold;
-	  padding:0 0 0 10px; text-transform:uppercase; font-size:12px; 
-	  color:#3764AA; line-height:32px; 
+a.button {
+  background: transparent url('../images/bg_button.gif') no-repeat scroll top left;
+  display: block; float: left; line-height:24px; font-weight:bold;
+  padding:0 0 0 10px; text-transform:uppercase; font-size:12px; 
+  color:#3764AA; line-height:32px; 
 	}
-	a.button:hover { color:#008CFF; }
-	a.button span {
-	  background: transparent url('../images/bg_button.gif') no-repeat scroll top right;
-	  display: block; padding:0 18px 0 0;
+a.button:hover { color:#008CFF; }
+a.button span {
+  background: transparent url('../images/bg_button.gif') no-repeat scroll top right;
+  display: block; padding:0 18px 0 0;
 	}
-		/*Download Reports CSV*/
-		a.btn_download {  padding-left:11px; background:transparent url(bg_button_download.png) no-repeat top left; }
-			a.btn_download:hover { background:transparent url(bg_button_download.png) no-repeat bottom left; }
-		a.btn_download span { background:transparent url(bg_button_download.png) no-repeat top right; padding-right:48px; }
-			a.btn_download:hover span { background:transparent url(bg_button_download.png) no-repeat bottom right; }
-		
-		/*Reports RSS*/
-		a.btn_rss {  padding-left:11px; background:transparent url(bg_button_rss.png) no-repeat top left; margin:5px 5px 0; }
-			a.btn_rss:hover { background:transparent url(bg_button_rss.png) no-repeat bottom left; }
-		a.btn_rss span { background:transparent url(bg_button_rss.png) no-repeat top right; padding-right:31px; }
-			a.btn_rss:hover span { background:transparent url(bg_button_rss.png) no-repeat bottom right; }
+
+
+/*//	=Download Reports CSV */
+a.btn_download {  padding-left:11px; background:transparent url(bg_button_download.png) no-repeat top left; }
+a.btn_download:hover { background:transparent url(bg_button_download.png) no-repeat bottom left; }
+a.btn_download span { background:transparent url(bg_button_download.png) no-repeat top right; padding-right:48px; }
+a.btn_download:hover span { background:transparent url(bg_button_download.png) no-repeat bottom right; }
+
+
+/*//	=Reports RSS */
+a.btn_rss {  padding-left:11px; background:transparent url(bg_button_rss.png) no-repeat top left; margin:5px 5px 0; }
+a.btn_rss:hover { background:transparent url(bg_button_rss.png) no-repeat bottom left; }
+a.btn_rss span { background:transparent url(bg_button_rss.png) no-repeat top right; padding-right:31px; }
+a.btn_rss:hover span { background:transparent url(bg_button_rss.png) no-repeat bottom right; }
+
+
+/*//	=Alerts */
+.alerts h2 { color:#0089CA; font-size:18px; line-height:29px; margin:0 0 10px; padding:0 0 0 33px; } 
+.alerts h3 { color:#666; font-size:14px; }
+
+h2.s1 { background:url(step-1.gif) 0 2px no-repeat; }
+h2.s2 { background:url(step-2.gif) 0 2px no-repeat; }
+h2.s3 { background:url(step-3.gif) 0 2px no-repeat; }
+
+table.tbl-two-col td { vertical-align:top; border-collapse:collapse; }
+.step-body { margin:0 0 0 33px; }
+
+.step-1 { float:none; margin:0; padding:0; width:auto; }
+.step-1 div.map { padding:0; width:auto; height:auto; border:2px solid #ccc; }
+.step-1 .map .map-holder { width:500px; height:325px; }
+input.findtext { font-size:14px; line-height:14px; padding:3px 0 4px; }
+.report-find-location { border:1px solid #ccc; padding:0 25px; height:100px; }
+
+.step-body .report_category ul { width:220px; }
+.step-body .report_category ul ul { width:auto; }
+.step-body .report_category ul input { margin:0 5px 0 0; }
+
+#keyword-box { margin:5px 0 0 0; }
+#keyword-list li { list-style-type:none; float:left; margin:0 5px 5px 0; padding:4px; background:#eee; }
+#keyword-list li span { color:#D8290D; font-size:12px; font-weight:bold; cursor:pointer; }

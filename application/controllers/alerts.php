@@ -43,6 +43,8 @@ class Alerts_Controller extends Main_Controller
         // Retrieve Country Cities
         $this->template->content->cities = $this->_get_cities($default_country);
 		
+		$this->template->content->categories = $this->_get_categories();
+		
 		// Setup and initialize form field names
         $form = array (
                 'alert_mobile' => '',
@@ -53,6 +55,8 @@ class Alerts_Controller extends Main_Controller
                 'alert_lon' => '',
 				'alert_radius' => ''
         	);
+
+		
 
         // Copy the form as errors, so the errors will be stored with keys
         // corresponding to the form field names
@@ -114,12 +118,33 @@ class Alerts_Controller extends Main_Controller
 		
         // Javascript Header
         $this->template->header->map_enabled = TRUE;
-        $this->template->header->js = new View('alerts_js');
+        $this->template->header->treeview_enabled = TRUE;
+		$this->template->header->js = new View('alerts_js');
         $this->template->header->js->default_map = Kohana::config('settings.default_map');
         $this->template->header->js->default_zoom = Kohana::config('settings.default_zoom');
         $this->template->header->js->latitude = $form['alert_lat'];
         $this->template->header->js->longitude = $form['alert_lon'];
+		
     }
+
+	private function _get_categories()
+    {
+ 	    // get categories array
+		//$this->template->content->bind('categories', $categories);
+				
+        $categories_total = ORM::factory('category')->where('category_visible', '1')->count_all();
+        $this->template->content->categories_total = $categories_total;
+
+		$categories = array();
+		foreach (ORM::factory('category')->where('category_visible', '1')->find_all() as $category)
+		{
+			// Create a list of all categories
+			$categories[$category->id] = array($category->category_title, $category->category_color);
+		}
+		
+	    return $categories;
+		
+	}
 
 	
     /**

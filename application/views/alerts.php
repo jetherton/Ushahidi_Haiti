@@ -17,9 +17,8 @@
 				<div id="content">
 					<div class="content-bg">
 						<!-- start alerts block -->
-						<div class="big-block">
-							<h1><?php echo Kohana::lang('ui_main.alerts_get'); ?></h1>
-							<?php
+						<div class="big-block alerts">
+                        <?php
 							if ($form_error) {
 							?>
 							<!-- red-box -->
@@ -39,88 +38,163 @@
 							}
 							?>
 							<?php print form::open() ?>
-							<div class="step-1">
-								<h2><?php echo Kohana::lang('ui_main.alerts_step1_select_city'); ?></h2>
-								<div class="map" style="padding-bottom:35px;">
-									<p><?php echo Kohana::lang('ui_main.alerts_place_spot'); ?></p>
-									
-                                    <div class="map-holder" id="divMap"></div>
-                                    <div style="clear:both;"></div>
-                                    
-                                    <div id="mapStatus" style="width:385px; border-top:1px solid #999;">
-                                    	<div id="mapMousePosition" style="min-width: 135px;border-right: solid 1px #999;text-align: center"></div>
-                                    </div>
-                                    <div style="clear:both;"></div>
-								
+                            
+							<h1><?php echo Kohana::lang('ui_main.alerts_get'); ?></h1>
+							<h3>Ushahidi Alerts allow you to be notified of certain reports based on a location and categories and/or keywords.</h3>
+                   
+                   
+                   <!--### Step 1: Location ###-->
+                            <h2 class="s1">Select Your Location</h2>
+                            
+                            <div class="step-body">
                                 
-                                </div>
-								<div class="report-find-location">
-									<?php print form::input('location_find', '', ' title="City, State and/or Country" class="findtext"'); ?>
-									<div style="float:left;margin:9px 0 0 5px;"><input type="button" name="button" id="button" value="Find Location" class="btn_find" /></div>
-									<div id="find_loading" class="report-find-loading"></div>
-									<div style="clear:both;" id="find_text">* If you can't find your location, please click on the map to pinpoint the correct location.</div>
-									<div class="alert_slider">
-										<select name="alert_radius" id="alert_radius">
-											<option value="1">1 KM</option>
-											<option value="5">5 KM</option>
-											<option value="10">10 KM</option>
-											<option value="20" selected="selected">20 KM</option>
-											<option value="50">50 KM</option>
-											<option value="100">100 KM</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<input type="hidden" id="alert_lat" name="alert_lat" value="<?php echo $form['alert_lat']; ?>">
-							<input type="hidden" id="alert_lon" name="alert_lon" value="<?php echo $form['alert_lon']; ?>">
-							<div class="step-2-holder">
-								<div class="step-2">
-									<h2><?php echo Kohana::lang('ui_main.alerts_step2_send_alerts'); ?></h2>
-									<div class="holder">
-										<div class="box">
-											<label>
-												<?php
-													if ($form['alert_mobile_yes'] == 1) {
-														$checked = true;
-													}
-													else
-													{
-													 	$checked = false;
-													}
-													print form::checkbox('alert_mobile_yes', '1', $checked);
-												?>
-												<span><strong><?php echo Kohana::lang('ui_main.alerts_mobile_phone'); ?></strong><br /><?php echo Kohana::lang('ui_main.alerts_enter_mobile'); ?></span>
-											</label>
-											<span><?php print form::input('alert_mobile', $form['alert_mobile'], ' class="text long"'); ?></span>
-										</div>
-										<div class="box">
-											<label>
-												<?php
-													if ($form['alert_email_yes'] == 1) {
-														$checked = true;
-													}
-													else
-													{
-														$checked = false;
-													}
-													print form::checkbox('alert_email_yes', '1', $checked);
-												?>
-												<span><strong><?php echo Kohana::lang('ui_main.alerts_email'); ?></strong><br /><?php echo Kohana::lang('ui_main.alerts_enter_email'); ?></span>
-											</label>
-											<span><?php print form::input('alert_email', $form['alert_email'], ' class="text long"'); ?></span>
-										</div>
-									</div>
-								</div>
-								<input id="btn-send-alerts" class="btn_submit" type="submit" value="<?php echo Kohana::lang('ui_main.alerts_btn_send'); ?>" />
-								<BR /><BR />
-								<a href="<?php echo url::base()."alerts/confirm";?>"><?php echo Kohana::lang('ui_main.alert_confirm_previous'); ?></a>
-							</div>
+                                <table class="tbl-two-col"  border="0">
+                                <tr>
+                                    <td style="width:500px;">
+                                        <div class="step-1">
+                                        	<h3 style="margin-bottom:8px;">Click on the map to pin-point your location. </h3>
+                                            <h2 class="hide"><?php echo Kohana::lang('ui_main.alerts_step1_select_city'); ?></h2>
+                                            <p class="hide"><?php echo Kohana::lang('ui_main.alerts_place_spot'); ?></p>
+                                            <div class="map">
+                                                <div class="map-holder" id="divMap"></div>
+                                              	<div id="mapStatus" style="width:auto; float:none; height:25px; border-top:1px solid #999; border-right:none; border-left:none; border-bottom:none;">
+                                                    <p>
+                                                    <span id="mapMousePosition" style="width:135px; display:block; float:left; height:25px; border-right: solid 1px #999;text-align: center; margin-right:18px;"></span>
+                                                    </p>
+                                                </div>
+                                            
+                                            
+                                            </div>
+                                            
+                                        </div>
+                                        <input type="hidden" id="alert_lat" name="alert_lat" value="<?php echo $form['alert_lat']; ?>">
+                                        <input type="hidden" id="alert_lon" name="alert_lon" value="<?php echo $form['alert_lon']; ?>">
+                                        
+                                    </td>
+                                    <td style="padding:0 0 0 18px">
+                                        <h3 style="margin:23px 0 5px 0;">Don't see your location? </h3>
+                                        <p><?php print form::input('location_find', 'Search for it here', ' title="City, State and/or Country" class="findtext"'); ?>
+                                       	<input type="button" name="button" id="button" value="Find Location" class="btn_find" /></p>
+                                        <div id="find_loading" class="report-find-loading"></div>
+                                        
+                                        <br />
+                                        
+                                        <h3 style="margin-bottom:5px;">Adjust Radius</h3>
+                                        <div class="report-find-location">
+                                                <select name="alert_radius" id="alert_radius">
+                                                    <option value="1">1 KM</option>
+                                                    <option value="5">5 KM</option>
+                                                    <option value="10">10 KM</option>
+                                                    <option value="20" selected="selected">20 KM</option>
+                                                    <option value="50">50 KM</option>
+                                                    <option value="100">100 KM</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    
+                                    </td>
+                                </tr>
+                                </table>
+                            </div>
+                            
+                            <hr />
+                            
+                   <!--### Step 2: Preferences ###-->
+                            <h2 class="s2">Set Your Alert Preferences</h2>
+                            <div class="step-body">
+                            	<table class="tbl-two-col" border="0">
+                                <tr>
+                                    <td style="width:458px; border-right:2px solid #ccc;">
+                                       <h3>Select Categories<?php //echo Kohana::lang('ui_main.reports_categories'); ?></h3>
+                                      
+                                        <div class="report_category" id="categories">
+                                            <?php 
+                                            $selected_categories = array();
+                                             if (!empty($form['incident_category']) && is_array($form['incident_category'])) {
+                                                $selected_categories = $form['incident_category'];
+                                            }
+                                            $columns = 2;
+                                            echo category::pseudo_tree_checkboxes($categories, $selected_categories, 'incident_category', $columns);
+                                            ?>
+                                        </div>
+                                    </td>
+                                    <td style="padding:0 0 0 18px;">
+                                        <h3 style="margin:0 0 3px">Add Keywords</h3>
+                                        <p><strong>Comma separated</strong>, 20 keywords max.</p>
+                                        <input type="text" class="findtext" />
+                                        <input type="button" name="button" id="button" value="Add" class="btn_find" />
+                                        <div id="keyword-box">
+                                        <p>
+                                        	<ul id="keyword-list">
+                                            	<li>shelter <span>x</span></li>
+                                                <li>food <span>x</span></li>
+                                                <li>bread <span>x</span></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </table>
+                            </div>
+                            
+                            <hr />
+                            
+                    <!--### Step 3: How To Receive ###-->        
+                            <h2 class="s3">Choose Where To Receive Alerts</h2>
+                            <h2 class="hide"><?php echo Kohana::lang('ui_main.alerts_step2_send_alerts'); ?></h2>
+							<div class="step-body">
+                                <table class="tbl-two-col" border="0">
+                                <tr>
+                                    <td style="width:265px; border-right:2px solid #ccc;">
+                                       <h3>
+											<?php
+                                                if ($form['alert_mobile_yes'] == 1) {
+                                                    $checked = true;
+                                                }
+                                                else
+                                                {
+                                                    $checked = false;
+                                                }
+                                                print form::checkbox('alert_mobile_yes', '1', $checked);
+                                            ?>
+                                            <span><?php echo Kohana::lang('ui_main.alerts_mobile_phone'); ?></span>
+                                        </h3>
+                                        <p><?php echo Kohana::lang('ui_main.alerts_enter_mobile'); ?></p>
+                                        <span><?php print form::input('alert_mobile', $form['alert_mobile'], ' class="text medium"'); ?></span>
+                                    </td>
+                                    <td style="padding:0 0 0 48px;">
+                                        <h3>
+											<?php
+                                                if ($form['alert_email_yes'] == 1) {
+                                                    $checked = true;
+                                                }
+                                                else
+                                                {
+                                                    $checked = false;
+                                                }
+                                                print form::checkbox('alert_email_yes', '1', $checked);
+                                            ?>
+                                            <span><?php echo Kohana::lang('ui_main.alerts_email'); ?></span>
+                                        </h3>
+                                        <p><?php echo Kohana::lang('ui_main.alerts_enter_email'); ?></p>
+                                        <span><?php print form::input('alert_email', $form['alert_email'], ' class="text long"'); ?></span>
+                                    </td>
+                                </tr>
+                                </table>                       
+                            </div>
+                            
+                           <p><input id="btn-send-alerts" class="btn_submit" type="submit" value="<?php echo Kohana::lang('ui_main.alerts_btn_send'); ?>" />
+                           &nbsp;&nbsp;-Or-&nbsp;&nbsp; 
+                           <a href="<?php echo url::base()."alerts/confirm";?>"><?php echo Kohana::lang('ui_main.alert_confirm_previous'); ?></a></p>
+							
+                            <hr />
+                            
 							<?php print form::close(); ?>
-														<?php
+                            
+							<?php
 								if ($allow_feed == 1 )
 								{
 							?>
-							<div class="step-2-holder">
+							
 								<div class="feed">
 									<h2><?php echo Kohana::lang('ui_main.alerts_rss'); ?></h2>
 									<div class="holder">
@@ -129,7 +203,6 @@
 										</div>
 									</div>
 								</div>
-							</div>
 							<?php
 								}
 							?>
