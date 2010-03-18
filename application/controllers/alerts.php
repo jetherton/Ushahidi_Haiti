@@ -121,7 +121,6 @@ class Alerts_Controller extends Main_Controller
         $this->template->header->js->longitude = $form['alert_lon'];
     }
 
-	
     /**
      * Alerts Confirmation Page
      */

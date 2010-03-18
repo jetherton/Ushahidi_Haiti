@@ -139,7 +139,6 @@
 				);
 				radiusLayer.addFeatures( [circleFeature] );
 			}			
-			
 			/* 
 			Google GeoCoder
 			TODO - Add Yahoo and Bing Geocoding Services
