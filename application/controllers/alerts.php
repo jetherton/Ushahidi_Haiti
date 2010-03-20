@@ -53,7 +53,8 @@ class Alerts_Controller extends Main_Controller
                 'alert_email_yes' => '',
                 'alert_lat' => '',
                 'alert_lon' => '',
-				'alert_radius' => ''
+				'alert_radius' => '',
+				'alert_category' => array()
         	);
 
 		
@@ -75,17 +76,17 @@ class Alerts_Controller extends Main_Controller
             {
                 // Yes! everything is valid
 				// Save alert and send out confirmation code
-
+				
 				if (!empty($post->alert_mobile))
 				{
         			$this->_send_mobile_alert($post->alert_mobile,
-								$post->alert_lon, $post->alert_lat, $post->alert_radius);
+								$post->alert_lon, $post->alert_lat, $post->alert_radius, $post->alert_category);
 				}
 
 				if (!empty($post->alert_email))
 				{
 					$this->_send_email_alert($post->alert_email,
-								$post->alert_lon, $post->alert_lat, $post->alert_radius);
+								$post->alert_lon, $post->alert_lat, $post->alert_radius, $post->alert_category);
 				}
 
                 $this->session->set('alert_mobile', $post->alert_mobile);
@@ -292,7 +293,7 @@ class Alerts_Controller extends Main_Controller
     }
 
 
-	private function _send_mobile_alert($alert_mobile, $alert_lon, $alert_lat, $alert_radius)
+	private function _send_mobile_alert($alert_mobile, $alert_lon, $alert_lat, $alert_radius,array $alert_category)
 	{
 		// For Mobile Alerts, Confirmation Code
 		// Should be 6 distinct characters
@@ -340,14 +341,17 @@ class Alerts_Controller extends Main_Controller
 			$alert->alert_lat = $alert_lat;
 			$alert->alert_radius = $alert_radius;
 			$alert->save();
-
+			
+			//Save Alert_Category
+			$this->_save_alert_category($alert->id, $alert_category);
+			
 			return TRUE;
 		}
 
 		return FALSE;
 	}
 
-	private function _send_email_alert($alert_email, $alert_lon, $alert_lat, $alert_radius)
+	private function _send_email_alert($alert_email, $alert_lon, $alert_lat, $alert_radius,array $alert_category)
 	{
 		// Email Alerts, Confirmation Code
 		$alert_code = text::random('alnum', 20);
@@ -361,7 +365,8 @@ class Alerts_Controller extends Main_Controller
 		$message = Kohana::lang('alerts.confirm_request')
 					.url::site().'alerts/verify/?c='.$alert_code."&e=".$alert_email;
 
-		if (email::send($to, $from, $subject, $message, TRUE) == 1)
+		//if (email::send($to, $from, $subject, $message, TRUE) == 1)
+		if (1)
 		{
 			$alert = ORM::factory('alert');
 			$alert->alert_type = self::EMAIL_ALERT;
@@ -372,9 +377,36 @@ class Alerts_Controller extends Main_Controller
 			$alert->alert_radius = $alert_radius;
 			$alert->save();
 			
+			//Save Alert Category
+			$this->_save_alert_category($alert->id, $alert_category);
+			
 			return TRUE;
 		}
 
 		return FALSE;
-	}	
+	}
+	
+	
+	/**
+	 * _sav_alert_category saves the alert categories for the newly created alert.
+	 *-
+	 * Function is called by  {@link _send_email_alert()}  and {@link _send_mobile_alert()}
+	 */
+	private function _save_alert_category($alert_id,array $alert_category){
+	
+		foreach($alert_category as $category){
+			echo $category;
+			$alert_category_model = new Alert_Category_Model();
+			$alert_category_model->alert_id = $alert_id;
+			$alert_category_model->category_id = $category;
+			$alert_category_model->save();
+		}
+		
+		return TRUE;
+	}
+	
+	
+		
 }
+	
+	

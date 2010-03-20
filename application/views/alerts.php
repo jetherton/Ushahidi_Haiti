@@ -110,11 +110,11 @@
                                         <div class="report_category" id="categories">
                                             <?php 
                                             $selected_categories = array();
-                                             if (!empty($form['incident_category']) && is_array($form['incident_category'])) {
-                                                $selected_categories = $form['incident_category'];
+                                             if (!empty($form['alert_category']) && is_array($form['alert_category'])) {
+                                                $selected_categories = $form['alert_category'];
                                             }
                                             $columns = 2;
-                                            echo category::pseudo_tree_checkboxes($categories, $selected_categories, 'incident_category', $columns);
+                                            echo category::pseudo_tree_checkboxes($categories, $selected_categories, 'alert_category', $columns);
                                             ?>
                                         </div>
                                     </td>
