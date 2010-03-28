@@ -25,7 +25,7 @@ class Alerts_Controller extends Controller
 		
 		
 		// PREVENT EXECUTION UNTIL WE FIX THE DUPLICATE ISSUE
-		
+		exit;
 	}
 	
 	public function index() 
