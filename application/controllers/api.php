@@ -665,7 +665,19 @@ class Api_Controller extends Controller {
                         		$error = array("error" => $this->_getErrorMsg(001,'id'));
                        		}
                        		break;
-
+						case "incidentid": //Incident Id
+							if(($this->_verifyArrayIndex($request,'id'))){
+								//check if an API call has reached its hourly limit.
+								if( !$this->_apiLimitStatus( $_SERVER['REMOTE_ADDR'] ) ){
+									$ret = $this->_incidentById($request['id']);
+									$this->_apiLog($request);
+								}else{
+									$error = array('error' => $this->_getErrorMsg(006, 'task'));
+								}
+							}else{
+								$error = array('error' => $this->_getErrorMsg(001,'id'));
+							}
+							break;
 						default:
 							$error = array("error" => $this->_getErrorMsg(002));
 					}
@@ -838,6 +850,7 @@ class Api_Controller extends Controller {
 			$xml->writeElement('description',$item->incidentdescription);
 			$xml->writeElement('date',$item->incidentdate);
 			$xml->writeElement('mode',$item->incidentmode);
+			$xml->writeElement('incidentphone', $item->incidentphone);
 			$xml->writeElement('active',$item->incidentactive);
 			$xml->writeElement('verified',$item->incidentverified);
 			$xml->startElement('location');
@@ -1928,7 +1941,6 @@ class Api_Controller extends Controller {
  	*/
 	function _incidentById($id){
 		$where = "\nWHERE i.id = $id AND i.incident_active = 1 ";
-		$where .= "ORDER BY i.id DESC ";
 		$limit = "\nLIMIT 0, $this->list_limit";
 		return $this->_getIncidents($where, $limit);
 	}

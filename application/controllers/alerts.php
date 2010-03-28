@@ -148,6 +148,7 @@ class Alerts_Controller extends Main_Controller
 	}
 
 	
+
     /**
      * Alerts Confirmation Page
      */
