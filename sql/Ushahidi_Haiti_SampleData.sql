@@ -48,6 +48,24 @@ INSERT INTO `alert` VALUES (178,2,'etienne1@cox.net','Rv53uZ5NDJPzAEDYelqT',1,'1
 /*!40000 ALTER TABLE `alert` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+--
+-- Table structure for table `alert_category`
+--
+
+DROP TABLE IF EXISTS `alert_category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `alert_category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `alert_id` bigint(20) NOT NULL DEFAULT '0',
+  `category_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `alert_category_ids` (`alert_id`,`category_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=11785 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
 --
 -- Table structure for table `alert_sent`
 --
