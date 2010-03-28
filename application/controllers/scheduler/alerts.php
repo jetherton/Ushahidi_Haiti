@@ -25,11 +25,13 @@ class Alerts_Controller extends Controller
 		
 		
 		// PREVENT EXECUTION UNTIL WE FIX THE DUPLICATE ISSUE
-		exit;
+		
 	}
 	
 	public function index() 
 	{
+	
+		
 		$settings = ORM::factory('settings')->find(1);
 		$site_name = $settings->site_name;
 		$alerts_email = $settings->alerts_email;
@@ -67,11 +69,14 @@ class Alerts_Controller extends Controller
 		
 		
 		// 1 - Retrieve All the Incidents that haven't been sent (Process only 1 per script execution)
-		$incidents = $db->query("SELECT incident.id, incident_title, 
+		$incidents = $db->query("
+								 SELECT incident.id, incident_title, 
 								 incident_description, incident_verified, 
 								 location.latitude, location.longitude
-								 FROM incident INNER JOIN location ON incident.location_id = location.id
-								 WHERE incident.incident_active=1 AND incident.incident_alert_status = 1 LIMIT 1 ");
+								 FROM incident
+								 INNER JOIN location on incident.location_id = incident.location_id
+								 WHERE incident.incident_active=1 AND incident.incident_alert_status = 1 LIMIT 1
+								");
 		
 		foreach ($incidents as $incident)
 		{
@@ -79,15 +84,20 @@ class Alerts_Controller extends Controller
 			$latitude = (double) $incident->latitude;
 			$longitude = (double) $incident->longitude;
 			
-			// 2 - Retrieve All Qualifying Alertees Based on Distance and Make sure they haven't received this alert
+			// 2 - Retrieve All Qualifying Alertees Based on Distance and Make sure they haven't received this alert,
+			// 	   Return Alertees if they haven't requested a Category OR Return Alertees if they specifically asked
+			// 	   for this incident region and specific category.
 			$distance_type = ($miles) ? "" : " * 1.609344";
-			$alertees = $db->query('SELECT DISTINCT alert.*, ((ACOS(SIN('.$latitude.' * PI() / 180) * 
+			
+			$alertees = $db->query('
+									SELECT DISTINCT alert.*, ((ACOS(SIN('.$latitude.' * PI() / 180) * 
 									SIN(`alert`.`alert_lat` * PI() / 180) + COS('.$latitude.' * PI() / 180) * 
 									COS(`alert`.`alert_lat` * PI() / 180) * COS(('.$longitude.' - `alert`.`alert_lon`)
 									 * PI() / 180)) * 180 / PI()) * 60 * 1.1515 '.$distance_type.') AS distance
-									FROM alert WHERE alert.alert_confirmed = 1 
-									HAVING distance <= alert_radius ');	
-			
+									FROM alert 
+									WHERE  alert.alert_confirmed = 1
+									HAVING distance <= alert_radius
+									');	
 			$i = 0;
 			foreach ($alertees as $alertee)
 			{
@@ -97,11 +107,25 @@ class Alerts_Controller extends Controller
 					->where('incident_id', $incident->id)
 					->find();
 				
-				if ($alert_sent->loaded == FALSE)
+				
+				$requested_category = true;	
+				
+				$alert_categories = ORM::factory('alert_category')
+									->select("alert_category.category_id")
+									->where('alert_id',$alertee->id)
+									->find_all();		
+				
+				// The Alertee requested specific categories for the incident.
+				// Make sure the categories are part of this incident.
+				
+				$requested_category = alert::requested_category($alert_categories,$incident->id);
+				
+				// Alert has not been sent and the alertee requested the incident with the category
+				if ( ( $alert_sent->loaded == FALSE ) && ( $requested_category ) )
 				{
 					// 4 - Get Alert Type. 1=SMS, 2=EMAIL
 					$alert_type = (int) $alertee->alert_type;
-
+						
 					if ($alert_type == 1) // SMS alertee
 					{
 						// Save this first
@@ -186,4 +210,5 @@ class Alerts_Controller extends Controller
 			}
 		}
 	}
+	
 }

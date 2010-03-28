@@ -152,4 +152,5 @@ class Alert_Model extends ORM
 			$array->add_error( 'alert_mobile', 'one_required');
     } // END function _mobile_or_email
 
+
 } // END class Alert_Model
