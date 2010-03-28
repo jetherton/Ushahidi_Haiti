@@ -102,39 +102,17 @@
                    <!--### Step 2: Preferences ###-->
                             <h2 class="s2">Set Your Alert Preferences</h2>
                             <div class="step-body">
-                            	<table class="tbl-two-col" border="0">
-                                <tr>
-                                    <td style="width:458px; border-right:2px solid #ccc;">
-                                       <h3>Select Categories<?php //echo Kohana::lang('ui_main.reports_categories'); ?></h3>
-                                      
-                                        <div class="report_category" id="categories">
-                                            <?php 
-                                            $selected_categories = array();
-                                             if (!empty($form['alert_category']) && is_array($form['alert_category'])) {
-                                                $selected_categories = $form['alert_category'];
-                                            }
-                                            $columns = 2;
-                                            echo category::pseudo_tree_checkboxes($categories, $selected_categories, 'alert_category', $columns);
-                                            ?>
-                                        </div>
-                                    </td>
-                                    <td style="padding:0 0 0 18px;">
-                                        <h3 style="margin:0 0 3px">Add Keywords</h3>
-                                        <p><strong>Comma separated</strong>, 20 keywords max.</p>
-                                        <input type="text" class="findtext" />
-                                        <input type="button" name="button" id="button" value="Add" class="btn_find" />
-                                        <div id="keyword-box">
-                                        <p>
-                                        	<ul id="keyword-list">
-                                            	<li>shelter <span>x</span></li>
-                                                <li>food <span>x</span></li>
-                                                <li>bread <span>x</span></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                </table>
-                            </div>
+                    	       	<h3>Select Categories<?php //echo Kohana::lang('ui_main.reports_categories'); ?></h3>
+                                <div class="report_category" id="categories">
+	                                <?php 
+	                                $selected_categories = array();
+	                                 if (!empty($form['alert_category']) && is_array($form['alert_category'])) {
+	                                    $selected_categories = $form['alert_category'];
+	                                }
+	                                echo category::pseudo_tree_checkboxes($categories, $selected_categories, 'alert_category', 2);
+	                                ?>
+	                            </div>
+                             </div>
                             
                             <hr />
                             
