@@ -21,9 +21,6 @@ class Alerts_Controller extends Controller
 		
 		set_time_limit(60);
 		
-		//Disable alerts until old incidents are flagged as sent. We are sending alerts dating back to January.
-		
-		exit;
 		
 	}
 	
