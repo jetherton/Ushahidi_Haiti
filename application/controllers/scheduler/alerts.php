@@ -21,17 +21,11 @@ class Alerts_Controller extends Controller
 		
 		set_time_limit(60);
 		
-		// $profiler = new Profiler;
-		
-		
-		// PREVENT EXECUTION UNTIL WE FIX THE DUPLICATE ISSUE
-		exit;
 	}
 	
 	public function index() 
 	{
 	
-		
 		$settings = ORM::factory('settings')->find(1);
 		$site_name = $settings->site_name;
 		$alerts_email = $settings->alerts_email;
