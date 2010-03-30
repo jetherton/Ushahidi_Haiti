@@ -204,6 +204,19 @@
 				}
 			}).hide();
 			
+			var def_value = "Search for it here";
+			
+			$("#location_find")
+				.focus(function() {
+					
+					if( $(this).val() === def_value )
+						$(this).val("");
+			
+				})
+				.blur(function(){
+					if($(this).val() === "")
+						$(this).val(def_value);
+				});
 			
 			// Some Default Values		
 			$("#alert_mobile").focus(function() {
