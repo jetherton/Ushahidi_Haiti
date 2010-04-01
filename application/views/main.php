@@ -157,7 +157,7 @@
 									<div id="mapScale" style="border-right: solid 1px #999"></div>
 									<div id="mapMousePosition" style="min-width: 135px;border-right: solid 1px #999;text-align: center"></div>
 									<div id="mapProjection" style="border-right: solid 1px #999"></div>
-									<div id="mapAttribution" style="float:right;">&copy; OpenStreetMap contributors, CC-BY-SA</div>
+									<div id="mapAttribution" style="float:right;"><a href="http://www.openstreetmap.org/index.html?lat=18.89&lon=-72.83&zoom=7">&copy; OpenStreetMap contributors</a>, CC-BY-SA</div>
 									<div id="mapOutput"></div>
 								</div>
 								<div style="clear:both;"></div>
