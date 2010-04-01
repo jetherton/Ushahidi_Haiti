@@ -69,7 +69,7 @@ class Alerts_Controller extends Controller
 								 incident_description, incident_verified, 
 								 location.latitude, location.longitude
 								 FROM incident
-								 INNER JOIN location on incident.location_id = incident.location_id
+								 INNER JOIN location on location.id = incident.location_id
 								 WHERE incident.incident_active=1 AND incident.incident_alert_status = 1 LIMIT 1
 								");
 		
