@@ -33,6 +33,7 @@
 								</a></li>
 								
 								<?php
+									sort($categories);
 									foreach ($categories as $category => $category_info) {
 										$category_title = $category_info[0];
 										$category_color = $category_info[1];
