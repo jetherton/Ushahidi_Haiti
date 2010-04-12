@@ -66,7 +66,9 @@
                                 </tr>
                                 <tr>
                                         <td><?php print form::checkbox('data_include[]','5',TRUE); ?>Include Longitude</td>
+                                        <td><?php print form::checkbox('data_include[]', '6', TRUE); ?>Include Phone</td>
                                 </tr>
+                                
 				<tr>
 					<td colspan="2">
 						<div class="date-box">
