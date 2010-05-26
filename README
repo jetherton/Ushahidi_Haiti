@@ -1,0 +1,59 @@
+WELCOME
+---
+Ushahidi Haiti is a customized version of the core Ushahidi application (as of v1.0.1).  Below are instructions for a manual installation, including the required SQL files and configuration notes.
+
+
+INSTALLATION
+---
+This page covers getting Ushahidi Haiti installed and running locally so you can help with ongoing development as we transition from response to recovery and the long-term work needed to provide support to aid organizations, governments, and individuals on the ground helping Haitian communities.
+
+If you would like an introduction to the general Ushahidi platform, please visit http://wiki.ushahidi.com. You may also want to read up on Kohana, the PHP5 framework Ushahidi is built on.
+Git the code
+
+Fork the master branch to your github account and pull from there. If you need help getting started with git, github has an excellent tutorial on how to create and work with a fork.
+PHP setup
+
+Please note Kohana is a MVC framework built to run on PHP5 only. You will need the PHP iconv and mcrypt modules installed.
+Test database included
+
+Ushahidi Haiti is a very customized version of the core Ushahidi application. With that in mind, running the usual application installer won’t get you very far we’ve removed the usual application installer and instead included two SQL files within the repository to help with a manual installation. (Yes, they’ve been sanitized to remove other accounts, private information, and other critical information from the live website.)
+
+The test databases are included within the SQL directory at the root.
+
+    * Ushahidi_Haiti_Structure.sql is the current working database structure of the website.
+    * Ushahidi_Haiti_SampleData.sql, is the current structure and contains several report records that you can work with and a user account for you to access the site administration.
+    * Ushahidi_Haiti_Database_Model.pdf is a Database Schema reference file.
+
+Use the second file Ushahidi_Haiti_SampleData.sql to setup a working environment.
+The username and password for your local site is “admin” and that section conveniently found at /admin.
+
+Once you’ve created your database and you’ve imported these files, there’s just a few things left to configure.
+Configuration
+
+Now that the code is in place, the database setup, and you’ve imported the SQL, there’s a few minor adjustment to be made.
+
+1. Connect to the database.
+Under /application/config/ there is a database.template.php file. Duplicate this file and rename to database.php. Open this file and edit the settings with the name of your database, username, and password.
+
+2. Turn off application caching.
+Open up /application/config/cache.php and set $config['cache_pages'] = TRUE; to FALSE.
+
+3. Create cache folder and set permissions.
+Even with cache disabled, Ushahidi needs and cache folder that isn’t included in the repository. Simple create an empty folder named cache within the application folder and make sure it’s writable.
+
+4. Test the login
+You should be able to view the complete and login at http://YOURVHOSTNAME/admin (changing that URL to your own virtualhost name). The admin account included in the test DB is:
+username: admin
+password: admin
+
+5. Google Maps API Key
+Finally, it won’t effect the functionality, but you’ll probably want to grab a Google maps API key so you’re not hit with the missing key alert on every page.
+
+Thanks very much for taking the time to get involved with the Ushahidi Haiti project. We’re doing a lot right now to transition this site into a model for development mapping work and still working several aid organizations and companies on the ground in Haiti right now to make sure this website is still a viable resource post-recovery. We look forward to hearing from you.
+
+Manager
+Denise Rosalind Sewell
+
+Technical
+Rob Baker – rrbaker//at//gmail//com | @rrbaker
+Antonio Letteri – @alettieri
